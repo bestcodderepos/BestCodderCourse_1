@@ -15,7 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BestCodder.Business\BestCodder.Business.csproj" />
     <ProjectReference Include="..\BestCodder.DataAccess\BestCodder.DataAccess.csproj" />
+    <ProjectReference Include="..\BestCodder.Models\BestCodder.Models.csproj" />
   </ItemGroup>
 
 </Project>

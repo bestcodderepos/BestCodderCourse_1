@@ -1,3 +1,5 @@
+using BestCodder.Business.Contracts;
+using BestCodder.Business.Implementaion;
 using BestCodder.DataAccess.Data;
 using BestCodderCourse.Areas.Identity;
 using BestCodderCourse.Data;
@@ -32,6 +34,7 @@ namespace BestCodderCourse
             //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             //    .AddEntityFrameworkStores<BestCodderCourseContext>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddScoped<ICourseRepository, CourseRepository>();
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();

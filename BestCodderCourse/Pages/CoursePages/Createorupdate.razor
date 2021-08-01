@@ -1,0 +1,68 @@
+﻿@page "/course/createorupdate" 
+@using BestCodder.Models 
+@using BestCodder.Business.Contracts 
+
+
+@inject ICourseRepository _courseRepository
+@inject NavigationManager _navigationManger 
+@inject IJSRuntime _jsRuntime
+
+<h4>Course Added</h4>
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-body">
+            <EditForm Model="courseModel" OnValidSubmit="CourseCreateOrUpdate">
+                <DataAnnotationsValidator></DataAnnotationsValidator>
+                <div class="form-group">
+                    <label>Name</label>
+                    <InputText @bind-Value="courseModel.Name" class="form-control"></InputText>
+                    <ValidationMessage For="()=>courseModel.Name"></ValidationMessage>
+                </div>
+                <div class="form-group">
+                    <label>CoursePrice</label>
+                    <InputNumber @bind-Value="courseModel.CoursePrice" class="form-control"></InputNumber>
+                    <ValidationMessage For="()=>courseModel.CoursePrice"></ValidationMessage>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <InputTextArea @bind-Value="courseModel.Description" class="form-control"></InputTextArea>
+                    <ValidationMessage For="()=>courseModel.Description"></ValidationMessage>
+                </div>
+                <div class="form-group">
+                    <label>Title</label>
+                    <InputText @bind-Value="courseModel.Title" class="form-control"></InputText>
+                    <ValidationMessage For="()=>courseModel.Title"></ValidationMessage>
+                </div>
+                <div class="form-group">
+                    <label>Sub Title</label>
+                    <InputText @bind-Value="courseModel.SubTitle" class="form-control"></InputText>
+                    <ValidationMessage For="()=>courseModel.SubTitle"></ValidationMessage>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-success">Course Add</button>
+                    <NavLink href="courselist" class="btn btn-danger">Back To Course List</NavLink>
+                </div>
+            </EditForm>
+        </div>
+    </div>
+</div>
+
+
+
+@code {
+
+    private CourseDto courseModel { get; set; } = new CourseDto();
+
+    private async Task CourseCreateOrUpdate()
+    {
+        var created = await _courseRepository.CreateCourse(courseModel);
+        if (created.IsSuccess)
+        {
+            await _jsRuntime.ToastrSuccess("Created Successfull");
+        }
+        //_navigationManger.NavigateTo("courselist");
+        //else
+        //    _navigationManger.NavigateTo("courselist");
+    }
+
+}

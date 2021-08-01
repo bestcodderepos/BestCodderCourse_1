@@ -1,0 +1,86 @@
+﻿@page "/courselist"
+
+@using BestCodder.Models
+@using BestCodder.Business.Contracts
+
+@inject ICourseRepository _courseRepository
+@inject NavigationManager _navigationManger
+
+<div class="row mt-4">
+    <div class="col-3">
+        <h5>Course List</h5>
+        <br />
+        <NavLink href="course/createorupdate" class="btn btn-success">Course Add</NavLink>
+    </div>
+</div>
+<div class="row mt-4">
+    <div class="col-12">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Desciption</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Is Active</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (CourseModelList.Any())
+                {
+                    foreach (var course in CourseModelList)
+                    {
+                        <tr>
+                            <th>@course.Name</th>
+                            <td>@course.CoursePrice</td>
+                            <td>@course.Description</td>
+                            <td>@course.Title</td>
+                            @if (course.IsActive)
+                            {
+                                <td>
+                                    Active
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    Pasif
+                                </td>
+                            }
+
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6">@ErrorMessage</td>
+                    </tr>
+
+                }
+
+
+
+            </tbody>
+        </table>
+
+    </div>
+
+
+</div>
+
+
+@code {
+
+    private IEnumerable<CourseDto> CourseModelList { get; set; } = new List<CourseDto>();
+    public string ErrorMessage { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var data = await _courseRepository.GetAllCourse();
+        if (!data.IsSuccess)
+            ErrorMessage = data.Message;
+        else
+            CourseModelList = data.Data;
+    }
+}
