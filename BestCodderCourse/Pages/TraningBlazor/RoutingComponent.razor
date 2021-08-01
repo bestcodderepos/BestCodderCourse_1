@@ -1,0 +1,29 @@
+﻿@page "/learnrouting"
+@page "/learn2routing"
+@page "/learnrouting/{param1}"
+@page "/learnrouting/{param1}/{param2}"
+@inject NavigationManager _navigationManager
+
+
+<h3>RoutingComponent</h3>
+
+<span>Paramatre 1 => @param1</span>
+<span>Paramatre 2 => @param2</span>
+
+<button class="btn btn-primary" @onclick="BacktoRouting">BacktoRouting</button>
+
+@code {
+
+    [Parameter]
+    public string param1 { get; set; }
+
+
+    [Parameter]
+    public string param2 { get; set; }
+
+
+    private void BacktoRouting()
+    {
+        _navigationManager.NavigateTo("learnrouting/"+param1);
+    }
+}
