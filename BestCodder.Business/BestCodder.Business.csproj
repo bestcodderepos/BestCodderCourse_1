@@ -4,4 +4,15 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BestCodder.Common\BestCodder.Common.csproj" />
+    <ProjectReference Include="..\BestCodder.DataAccess\BestCodder.DataAccess.csproj" />
+    <ProjectReference Include="..\BestCodder.Models\BestCodder.Models.csproj" />
+  </ItemGroup>
+
 </Project>
