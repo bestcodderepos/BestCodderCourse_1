@@ -23,6 +23,7 @@
                     <th scope="col">Desciption</th>
                     <th scope="col">Title</th>
                     <th scope="col">Is Active</th>
+                    <th scope="col">Operations</th>
                 </tr>
             </thead>
             <tbody>
@@ -47,6 +48,9 @@
                                     Pasif
                                 </td>
                             }
+                            <td>
+                                <NavLink href="@($"/course/edit/{course.Id}")" class="btn btn-primary">Edit</NavLink>
+                            </td>
 
                         </tr>
                     }

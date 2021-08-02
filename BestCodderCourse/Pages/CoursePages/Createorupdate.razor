@@ -1,11 +1,15 @@
-﻿@page "/course/createorupdate" 
-@using BestCodder.Models 
-@using BestCodder.Business.Contracts 
+﻿@page "/course/createorupdate"
+@page "/course/edit/{Id:int}"
+
+@using BestCodder.Models
+@using BestCodder.Business.Contracts
+@using BestCodderCourse.Service
 
 
 @inject ICourseRepository _courseRepository
-@inject NavigationManager _navigationManger 
+@inject NavigationManager _navigationManger
 @inject IJSRuntime _jsRuntime
+@inject IFileUpload _fileUpload
 
 <h4>Course Added</h4>
 <div class="col-md-12">
@@ -38,6 +42,12 @@
                     <InputText @bind-Value="courseModel.SubTitle" class="form-control"></InputText>
                     <ValidationMessage For="()=>courseModel.SubTitle"></ValidationMessage>
                 </div>
+                @if (Id > 0)
+                {
+                    <div class="form-group">
+                        <InputFile OnChange="AddPicture"></InputFile>
+                    </div>
+                }
                 <div class="form-group">
                     <button class="btn btn-success">Course Add</button>
                     <NavLink href="courselist" class="btn btn-danger">Back To Course List</NavLink>
@@ -51,18 +61,67 @@
 
 @code {
 
+    [Parameter]
+    public int? Id { get; set; }
+
+
+    private string Title { get; set; }
+
     private CourseDto courseModel { get; set; } = new CourseDto();
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Id != null)
+        {
+            Title = "Update";
+            var data = await _courseRepository.GetCourse((int)Id);
+            courseModel = data.Data;
+        }
+        else
+        {
+            //create
+        }
+    }
 
     private async Task CourseCreateOrUpdate()
     {
-        var created = await _courseRepository.CreateCourse(courseModel);
-        if (created.IsSuccess)
+        try
         {
-            await _jsRuntime.ToastrSuccess("Created Successfull");
+            if (Id != null)
+            {
+                var updateData = await _courseRepository.UpdateCourse((int)Id, courseModel);
+                if (updateData.IsSuccess)
+                    await _jsRuntime.ToastrSuccess(updateData.Message);
+                else
+                    await _jsRuntime.ToastrError(updateData.Message);
+            }
+            else
+            {
+                var created = await _courseRepository.CreateCourse(courseModel);
+                if (created.IsSuccess)
+                    await _jsRuntime.ToastrSuccess(created.Message);
+                else
+                    await _jsRuntime.ToastrError(created.Message);
+            }
         }
-        //_navigationManger.NavigateTo("courselist");
-        //else
-        //    _navigationManger.NavigateTo("courselist");
+        catch (Exception ex)
+        {
+            await _jsRuntime.ToastrError(ex.Message.ToString());
+        }
+    }
+
+    private async Task AddPicture(InputFileChangeEventArgs file)
+    {
+        var fileName = file.File;
+        if (fileName != null)
+        {
+            var data = await _fileUpload.UploadFile(fileName);
+            var updateCourse = await _courseRepository.UpdateCourseImage((int)Id, data);
+            if (updateCourse.IsSuccess)
+                await _jsRuntime.ToastrSuccess(updateCourse.Message);
+            else
+                await _jsRuntime.ToastrError(updateCourse.Message);
+        }
     }
 
 }

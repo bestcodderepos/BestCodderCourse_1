@@ -95,5 +95,30 @@ namespace BestCodder.Business.Implementaion
                 return new Result<CourseDto>(false, ResultConstant.RecordUpdateNotSuccessfully);
             }
         }
+
+        public async Task<Result<CourseDto>> UpdateCourseImage(int courseId, string imagePath)
+        {
+            try
+            {
+                if (courseId > 0)
+                {
+                    var courseDetails = await _ctx.Courses.FindAsync(courseId);
+
+                    courseDetails.UpdatedBy = "Best Codder";
+                    courseDetails.UpdatedDate = DateTime.Now;
+                    courseDetails.ImageUrl = imagePath;
+                    var updateCourse = _ctx.Courses.Update(courseDetails);
+                    await _ctx.SaveChangesAsync();
+                    var returnData = _mapper.Map<Course, CourseDto>(updateCourse.Entity);
+                    return new Result<CourseDto>(true, ResultConstant.RecordUpdateSuccessfully, returnData);
+                }
+                else
+                    return new Result<CourseDto>(false, ResultConstant.RecordUpdateNotSuccessfully);
+            }
+            catch (Exception)
+            {
+                return new Result<CourseDto>(false, ResultConstant.RecordUpdateNotSuccessfully);
+            }
+        }
     }
 }

@@ -3,6 +3,7 @@ using BestCodder.Business.Implementaion;
 using BestCodder.DataAccess.Data;
 using BestCodderCourse.Areas.Identity;
 using BestCodderCourse.Data;
+using BestCodderCourse.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -35,6 +36,7 @@ namespace BestCodderCourse
             //    .AddEntityFrameworkStores<BestCodderCourseContext>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<ICourseRepository, CourseRepository>();
+            services.AddScoped<IFileUpload, FileUpload>();
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();

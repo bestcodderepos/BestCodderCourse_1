@@ -9,6 +9,7 @@ namespace BestCodder.Business.Contracts
     {
         public Task<Result<CourseDto>> CreateCourse(CourseDto courseDto);
         public Task<Result<CourseDto>> UpdateCourse(int courseId, CourseDto courseDto);
+        public Task<Result<CourseDto>> UpdateCourseImage(int courseId, string imagePath);
         public Task<Result<CourseDto>> GetCourse(int courseId);
         public Task<Result<int>> DeleteCourse(int courseId);
 
