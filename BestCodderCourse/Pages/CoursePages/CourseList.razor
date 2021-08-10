@@ -62,21 +62,18 @@
                     </tr>
 
                 }
-
-
-
             </tbody>
+
         </table>
-
     </div>
-
-
 </div>
 
 
 @code {
 
     private IEnumerable<CourseDto> CourseModelList { get; set; } = new List<CourseDto>();
+    private IEnumerable<CourseDto> courseList = Enumerable.Empty<CourseDto>();
+
     public string ErrorMessage { get; set; }
 
     protected override async Task OnInitializedAsync()

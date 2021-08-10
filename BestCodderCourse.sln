@@ -5,13 +5,13 @@ VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BestCodderCourse", "BestCodderCourse\BestCodderCourse.csproj", "{2DD2C3AE-FF66-4E8C-BBCF-D14E1EF53A11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BestCodder.DataAccess", "BestCodder.DataAccess\BestCodder.DataAccess.csproj", "{A28DF4E4-EB6B-4102-8967-AC3493534E85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BestCodder.DataAccess", "BestCodder.DataAccess\BestCodder.DataAccess.csproj", "{A28DF4E4-EB6B-4102-8967-AC3493534E85}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BestCodder.Common", "BestCodder.Common\BestCodder.Common.csproj", "{C8C72EFC-A941-46AF-8ADF-4BA4F156D238}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BestCodder.Common", "BestCodder.Common\BestCodder.Common.csproj", "{C8C72EFC-A941-46AF-8ADF-4BA4F156D238}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BestCodder.Models", "BestCodder.Models\BestCodder.Models.csproj", "{714290C2-89B5-4B97-8DAF-8A0A0E9671EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BestCodder.Models", "BestCodder.Models\BestCodder.Models.csproj", "{714290C2-89B5-4B97-8DAF-8A0A0E9671EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BestCodder.Business", "BestCodder.Business\BestCodder.Business.csproj", "{B6F95B67-6E4F-4E78-9E37-EA0F4B02D505}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BestCodder.Business", "BestCodder.Business\BestCodder.Business.csproj", "{B6F95B67-6E4F-4E78-9E37-EA0F4B02D505}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

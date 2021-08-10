@@ -1,0 +1,42 @@
+﻿@page "/radzencourselist"
+
+@using BestCodder.Models
+@using BestCodder.Business.Contracts
+
+@inject ICourseRepository _courseRepository
+@inject NavigationManager _navigationManger
+
+<div class="row mt-4">
+    <div class="col-3">
+        <h5>Course List</h5>
+        <br />
+        <NavLink href="course/createorupdate" class="btn btn-success">Course Add</NavLink>
+    </div>
+</div>
+
+<RadzenGrid TItem="CourseDto" AllowPaging="true" AllowFiltering="true" FilterCaseSensivity="FilterCaseSensivity.CaseInsensitive" PageSize="4" AllowSorting="true" Data="@CourseModelList" ColumnWidth="150px">
+    <Columns>
+        <RadzenGridColumn TItem="CourseDto" Title="Name" Property="Name"></RadzenGridColumn>
+        <RadzenGridColumn TItem="CourseDto" Title="CoursePrice" Property="CoursePrice"></RadzenGridColumn>
+        <RadzenGridColumn TItem="CourseDto" Title="Description" Property="Description"></RadzenGridColumn>
+        <RadzenGridColumn TItem="CourseDto" Title="Title" Property="Title"></RadzenGridColumn>
+    </Columns>
+</RadzenGrid>
+
+
+@code {
+
+    private IEnumerable<CourseDto> CourseModelList { get; set; } = new List<CourseDto>();
+    private IEnumerable<CourseDto> courseList = Enumerable.Empty<CourseDto>();
+
+    public string ErrorMessage { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var data = await _courseRepository.GetAllCourse();
+        if (!data.IsSuccess)
+            ErrorMessage = data.Message;
+        else
+            CourseModelList = data.Data;
+    }
+}
