@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace BestCodder.DataAccess.Data
 {
-    public class BestCodderCourseContext : DbContext
+    public class BestCodderCourseContext : IdentityDbContext
     {
         public BestCodderCourseContext(DbContextOptions<BestCodderCourseContext> options)
             : base(options)

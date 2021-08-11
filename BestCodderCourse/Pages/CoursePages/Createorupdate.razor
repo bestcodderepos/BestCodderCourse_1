@@ -11,6 +11,8 @@
 @inject IJSRuntime _jsRuntime
 @inject IFileUpload _fileUpload
 
+@*@attribute [Authorize]*@
+
 <h4>Course Added</h4>
 <div class="col-md-12">
     <div class="card">
@@ -61,6 +63,10 @@
 
 @code {
 
+    [CascadingParameter]
+    public Task<AuthenticationState> State { get; set; }
+
+
     [Parameter]
     public int? Id { get; set; }
 
@@ -71,6 +77,14 @@
 
     protected override async Task OnInitializedAsync()
     {
+        var authState = await State;
+        if (!authState.User.Identity.IsAuthenticated)
+        {
+            var url = new Uri(_navigationManger.Uri);
+            _navigationManger.NavigateTo($"/Identity/account/login?returnUrl={url.LocalPath}");
+        }
+
+
         if (Id != null)
         {
             Title = "Update";
