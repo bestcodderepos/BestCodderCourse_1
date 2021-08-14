@@ -32,8 +32,6 @@ namespace BestCodderCourse
             services.AddDbContext<BestCodderCourseContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-            //    .AddEntityFrameworkStores<BestCodderCourseContext>();
 
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<BestCodderCourseContext>()
                 .AddDefaultTokenProviders()
