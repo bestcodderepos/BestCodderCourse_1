@@ -4,4 +4,9 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BestCodder.DataAccess\BestCodder.DataAccess.csproj" />
+    <ProjectReference Include="..\BestCodder.Models\BestCodder.Models.csproj" />
+  </ItemGroup>
+
 </Project>

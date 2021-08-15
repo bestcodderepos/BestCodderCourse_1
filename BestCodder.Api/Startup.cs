@@ -62,6 +62,7 @@ namespace BestCodder.Api
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<ICourseRepository, CourseRepository>();
+            services.AddScoped<ICourseOrderInfoRepoistory, CourseOrderInfoRepository>();
             services.AddScoped<ITokenService, TokenService>();
 
             services.AddCors(o => o.AddPolicy("BestCodderCourse", builder =>

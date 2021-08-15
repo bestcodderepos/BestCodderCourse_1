@@ -1,0 +1,92 @@
+﻿@page "/courseList"
+
+@inject NavigationManager _navigationManager
+@inject ICourseService _courseService
+
+<br />
+
+
+<div class="row">
+
+    @if (courseList != null)
+    {
+        foreach (var course in courseList)
+        {
+            <div class="col-3" style="padding:40px;">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="cad-title">@course.Name</h5>
+                        <h6 class="card-subtitle text-muted">@course.SubTitle</h6>
+                    </div>
+                    @if (course.ImageUrl != null)
+                    {
+                        <img class="d-block w-100" src="@course.ImageUrl" style="width:50%;height:50%" />
+                    }
+                    else
+                    {
+                        <img src="~/~/CourseImages/ecbf5fd0-f417-4a5f-a9c4-ffd063efd6ee.png" style="width:50%;height:50%" />
+                    }
+                    <div class="card-body">
+                        <p class="card-text">@course.Description</p>
+                    </div>
+                    <hr />
+                    <div class="card-body">
+                        <p class="card-text">Price: @course.CoursePrice </p>
+                        <hr />
+                        <p class="card-text">Total Course Count: @course.TotalCount </p>
+                    </div>
+                    <div class="card-body">
+                        <button class="btn btn-warning" @onclick="()=> HandleGoDetail(course.Id)">Detail</button>
+                        <button class="btn btn-primary" @onclick="()=> HandleGoCheckout(course.Id)">Buy Course</button>
+                    </div>
+                    <div class="card-footer">
+                        Create Date : @course.CreatedDate
+                    </div>
+                </div>
+            </div>
+        }
+
+
+    }
+
+</div>
+
+@code {
+
+    public IEnumerable<CourseDto> courseList { get; set; } = new List<CourseDto>();
+
+    public string ErrorMessage { get; set; }
+
+    public int TotalCount { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            await GetAllCourse();
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.Message.ToString();
+        }
+    }
+
+    private async Task GetAllCourse()
+    {
+        var data = await _courseService.GetAllCourse();
+        courseList = data.Data;
+        ErrorMessage = data.Message;
+        TotalCount = data.TotalCount;
+    }
+
+    private void HandleGoDetail(int courseId)
+    {
+        _navigationManager.NavigateTo("courseDetail/" + courseId);
+    }
+
+    private void HandleGoCheckout(int courseId)
+    {
+        _navigationManager.NavigateTo("courseCheckout/" + courseId);
+    }
+
+}

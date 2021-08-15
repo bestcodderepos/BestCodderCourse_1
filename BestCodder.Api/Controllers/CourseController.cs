@@ -17,7 +17,7 @@ namespace BestCodder.Api.Controllers
             _courseRepository = courseRepository;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         public async Task<IActionResult> GetCourses()
         {

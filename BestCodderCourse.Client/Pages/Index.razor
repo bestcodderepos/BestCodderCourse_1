@@ -1,0 +1,15 @@
+﻿@page "/"
+
+@inject NavigationManager _navigationManager
+
+
+@code{
+
+    public IEnumerable<CourseDto> courseList { get; set; } = new List<CourseDto>();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        _navigationManager.NavigateTo("courseList", true);
+    }
+}

@@ -33,7 +33,8 @@
         public const string Role_Customer = "Customer";
         public const string Role_Employee = "Employee";
         //-----------------------------------------------------------------------------------------//
-        public const string BaseApiUrl = "https://localhost:44319/";
+        public const string BaseApiUrl = "http://localhost:25244";
+        public const string ImageServerUrl = "  http://localhost:5000/";
         //-----------------------------------------------------------------------------------------//
         public const string Status_Pending = "Pending";
         public const string Status_Cancelled = "Cancelled";

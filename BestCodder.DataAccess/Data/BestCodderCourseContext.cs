@@ -11,5 +11,6 @@ namespace BestCodder.DataAccess.Data
         }
 
         public DbSet<Course> Courses { get; set; }
+        public DbSet<CourseOrderInfo> CourseOrderInfos { get; set; }
     }
 }
